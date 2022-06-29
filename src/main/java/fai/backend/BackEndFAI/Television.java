@@ -1,6 +1,9 @@
 package fai.backend.BackEndFAI;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,12 +13,18 @@ import javax.persistence.Table;
 @Entity
 //@Table(name="monitors")
 public class Television {
-	@Id
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="stock_id")
 	private int tvId;
+	@Column(name="stock_name")
 	private String model;
+	@Column(name="stock_brand")
 	private String brand;
+	@Column(name="stock_cost")
 	private int cost;
+	@Column(name="stock_size")
 	private double inches;
+	@Column(name="stock_type")
 	private String type;
 	@Override
 	public String toString() {
