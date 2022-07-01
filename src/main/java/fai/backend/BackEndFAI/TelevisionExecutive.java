@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,8 +16,23 @@ public class TelevisionExecutive {
 	@Autowired
 	TelevisionService service;
 	
+	@DeleteMapping("/del")
+	public String callingMakeDelete(@RequestBody Television te) {
+		return service.makeDelete(te);
+	}
+	
+	@GetMapping("/bywhat/{west}")
+	public List<String> callingFetchTypes(@PathVariable("west") String west){
+		return service.makeFetchByTypes(west);
+	}
+	
+	@GetMapping("/bytwo/{one}/{two}")
+	public List<Television> callingFetchTwo(@PathVariable("one") String one,@PathVariable("two") double two){
+		return service.makeFetchByBrandInch(one, two);
+	}
+	
 	@GetMapping("/byprice/{value}")
-	public Optional<Television> callingReadCost(@PathVariable("value") int value){
+	public List<Television> callingReadCost(@PathVariable("value") int value){
 		return service.makeReadCost(value);
 	}
 	

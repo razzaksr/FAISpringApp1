@@ -12,9 +12,26 @@ public class TelevisionService {
 	@Autowired
 	TelevisionInterface obj;
 	
-	// findByCost implementation
-	public Optional<Television> makeReadCost(int rest){
-		return obj.findByCost(rest);
+	// delete implementation
+	public String makeDelete(Television tel) {
+		String msg=tel.getModel()+" has deleted";
+		obj.delete(tel);
+		return msg;
+	}
+	
+	// findAllByTypes implementation
+	public List<String> makeFetchByTypes(String ty){
+		return obj.findAllByTypes(ty);
+	}
+	
+	// findAllByBrandAndInches implementation
+	public List<Television> makeFetchByBrandInch(String alpha,double beta){
+		return obj.findAllByBrandAndInches(alpha, beta);
+	}
+	
+	// findAllByCost implementation
+	public List<Television> makeReadCost(int rest){
+		return obj.findAllByCost(rest);
 	}
 	
 	//findById implementation
