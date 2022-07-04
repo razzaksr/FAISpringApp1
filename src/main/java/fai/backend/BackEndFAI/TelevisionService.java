@@ -12,6 +12,11 @@ public class TelevisionService {
 	@Autowired
 	TelevisionInterface obj;
 	
+	// updatePriceByBrand implementation
+	public void makeUpdate(String which){
+		obj.updatePriceByBrand(which);
+	}
+	
 	// delete implementation
 	public String makeDelete(Television tel) {
 		String msg=tel.getModel()+" has deleted";
