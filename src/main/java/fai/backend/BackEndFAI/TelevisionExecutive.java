@@ -17,6 +17,16 @@ public class TelevisionExecutive {
 	@Autowired
 	TelevisionService service;
 	
+	@DeleteMapping("/delall/{tp}")
+	public List<String> callingDeleteMany(@PathVariable("tp") String tp){
+		return service.makeDeleteCustom(tp);
+	}
+	
+	@DeleteMapping("/delid/{pos}")
+	public String callingDeleteId(@PathVariable("pos") int pos) {
+		return service.makeDeleteKey(pos);
+	}
+	
 	@PutMapping("/ups/{band}")
 	public void callingUpdatePrice(@PathVariable("band") String band){
 		service.makeUpdate(band);

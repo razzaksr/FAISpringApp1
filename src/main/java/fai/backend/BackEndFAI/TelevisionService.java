@@ -12,6 +12,21 @@ public class TelevisionService {
 	@Autowired
 	TelevisionInterface obj;
 	
+	// deleteAllByCustomize implementation
+	public List<String> makeDeleteCustom(String tp){
+		List<String> tmp = obj.findAllByTypesLike(tp);
+		obj.deleteAllByCustomize(tp);
+		return tmp;
+	}
+	
+	// deleteById implementation
+	public String makeDeleteKey(int key) {
+		Television t=obj.findById(key).orElse(null);
+		String msg=t.getModel()+" has deleted";
+		obj.deleteById(key);
+		return msg;
+	}
+	
 	// updatePriceByBrand implementation
 	public void makeUpdate(String which){
 		obj.updatePriceByBrand(which);

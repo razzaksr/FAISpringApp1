@@ -17,6 +17,14 @@ public interface TelevisionInterface extends CrudRepository<Television, Integer>
 	public Optional<Television> findByBrand(String brand);
 	public List<Television> findAllByCost(int cost);
 	
+	@Transactional	// in order to update/ delete based custom condition  
+	@Modifying// in order to update/ delete based custom condition
+	@Query("delete from Television where type like %:own%")
+	public void deleteAllByCustomize(String own);
+	
+	@Query("select model from Television where type like %:tp%")
+	public List<String> findAllByTypesLike(String tp);
+	
 	// cost=cost*1.5		>> increase cost by 50%
 	// cost=cost*0.5		>> decrease cost by 50%
 	
