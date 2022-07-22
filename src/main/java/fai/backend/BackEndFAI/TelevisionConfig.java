@@ -3,16 +3,26 @@ package fai.backend.BackEndFAI;
 import java.util.Collection;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class TelevisionConfig{
+	
+	@Autowired
+	ResourceService srv;
+	
+	AuthenticationManager manager;
 	
 	@Bean
 	public InMemoryUserDetailsManager silviya() {
@@ -27,11 +37,22 @@ public class TelevisionConfig{
 	}
 	
 	@Bean
+	public PasswordEncoder encoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
 	public SecurityFilterChain prabakaran(HttpSecurity hp) throws Exception {
 		hp.authorizeRequests().anyRequest().authenticated();
 		hp.csrf().disable();
 		hp.httpBasic();
 		hp.formLogin();
+		
+		AuthenticationManagerBuilder builder=hp.getSharedObject(AuthenticationManagerBuilder.class);
+		builder.userDetailsService(srv).passwordEncoder(encoder());
+		manager=builder.build();
+		hp.authenticationManager(manager);
+		
 		return hp.build();
 	}
 }
