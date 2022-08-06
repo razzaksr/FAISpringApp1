@@ -26,6 +26,11 @@ public class TelevisionExecutive {
 	@Autowired
 	ResourceService serv;
 	
+	@GetMapping("/haithere")
+	public void saySome() {
+		System.out.println("Backend called");
+	}
+	
 	@PostMapping("/signup")
 	public Resource signingUp(@RequestBody Resource resource) {
 		String newone=encoder.encode(resource.getPassword());

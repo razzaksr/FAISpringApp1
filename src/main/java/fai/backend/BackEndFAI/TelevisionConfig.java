@@ -51,6 +51,8 @@ public class TelevisionConfig{
 	@Bean
 	public SecurityFilterChain prabakaran(HttpSecurity hp) throws Exception {
 		hp.authorizeRequests().anyRequest().authenticated();
+		//hp.authorizeRequests().anyRequest().permitAll();
+		hp.cors();
 		hp.csrf().disable();
 		hp.httpBasic();
 		hp.formLogin();
