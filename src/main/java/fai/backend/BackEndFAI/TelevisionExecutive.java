@@ -26,6 +26,21 @@ public class TelevisionExecutive {
 	@Autowired
 	ResourceService serv;
 	
+	@GetMapping("/askint")
+	public int returnInt() {
+		return 1200;
+	}
+	
+	@PostMapping("/posting")
+	public void readingByBody(@RequestBody Television tel) {
+		System.out.println("Received as body "+tel);
+	}
+	
+	@GetMapping("/pass/{alpha}/{beta}")
+	public void readSome(@PathVariable("alpha") String alpha,@PathVariable("beta") int beta) {
+		System.out.println("Received String is "+alpha+" and integer is "+beta);
+	}
+	
 	@GetMapping("/haithere")
 	public void saySome() {
 		System.out.println("Backend called");
